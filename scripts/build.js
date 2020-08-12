@@ -13,6 +13,19 @@ function svgToReact(svg, componentName) {
 
 console.log('Building React components...')
 
+
+const spawn = require('cross-spawn');
+const process = require('process');
+async function zipAll(dir: string, zipfile: string) {
+  const args = [zipfile,dir];
+  const child =await spawn('zip',args, {shell: true, stdio: 'pipe' });
+    output =  new Buffer('');
+  child.stdout.on('data',(data) => {
+      output = Buffer.concat(output,new Buffer(data));
+  }
+  // Spawn NPM asynchronously
+
+
 rimraf('./react/outline/*')
   .then(() => {
     return rimraf('./react/solid/*')
@@ -79,3 +92,7 @@ rimraf('./react/outline/*')
     ])
   })
   .then(() => console.log('Finished building React components.'))
+
+  
+  zipAll('./outline','../outline.zip');
+  zipAll('../solid/','../solid.zip');
