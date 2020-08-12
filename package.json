@@ -23,7 +23,8 @@
     "@svgr/core": "^5.4.0",
   }, 
   "scripts": {
-    "prepare": "npm run build",
+    "package": "node ./scrips/build.js && ./build.sh",
+    "prepare": "npm run build && chmod -R +x ./build.sh ./scripts/build.js",
     "build": "npm run build-outline && npm run build-solid && npm run build-react && npm run build-vue",
     "build-react": "node ./scripts/build-react.js",
     "build-vue": "node ./scripts/build-vue.js",
